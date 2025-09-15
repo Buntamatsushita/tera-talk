@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import Header from "./Header";
-import Footer from "./Footer";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -16,18 +15,17 @@ export default function PageLayout({
   return (
     <div
       className={`min-h-screen ${className}`}
-      style={{ backgroundColor: "var(--color-base-bg)" }}
+      style={{
+        background:
+          "linear-gradient(180deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%)",
+      }}
     >
-      {/* Skip Link */}
-      <a href="#main-content" className="skip-link">
-        メインコンテンツにスキップ
-      </a>
 
       <Header currentPage={currentPage} />
 
       <main
         id="main-content"
-        className="container mx-auto px-4 sm:px-6 py-12 sm:py-20"
+        className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 content-rich"
       >
         {children}
       </main>
