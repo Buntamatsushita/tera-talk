@@ -23,6 +23,8 @@ export default function ClientChatPage({
   monk: MonkDef;
   monkKey?: string;
 }) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const monkImageSrc = `${basePath}${monk.image}`;
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -258,7 +260,7 @@ export default function ClientChatPage({
             }}
           >
             <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gradient-to-r ${monk.color} flex items-center justify-center`}>
-              <Image src={monk.image} alt={`${monk.name}のアイコン`} width={32} height={32} className="w-full h-full object-cover" />
+              <Image src={monkImageSrc} alt={`${monk.name}のアイコン`} width={32} height={32} className="w-full h-full object-cover" />
             </div>
             <div>
               <h1
@@ -418,7 +420,7 @@ export default function ClientChatPage({
                   ) : (
                     <div className="flex items-start space-x-3">
                       <div className={`w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-r ${monk.color}`}>
-                        <Image src={monk.image} alt={`${monk.name}のアイコン`} width={32} height={32} className="w-full h-full object-cover" />
+                        <Image src={monkImageSrc} alt={`${monk.name}のアイコン`} width={32} height={32} className="w-full h-full object-cover" />
                       </div>
                       <div className="chat-message-ai max-w-xs sm:max-w-sm lg:max-w-md">
                         <p className="text-sm leading-relaxed">
@@ -440,7 +442,7 @@ export default function ClientChatPage({
                 <div className="flex justify-start">
                   <div className="flex items-start space-x-3">
                     <div className={`w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-r ${monk.color}`}>
-                      <Image src={monk.image} alt={`${monk.name}のアイコン`} width={32} height={32} className="w-full h-full object-cover" />
+                      <Image src={monkImageSrc} alt={`${monk.name}のアイコン`} width={32} height={32} className="w-full h-full object-cover" />
                     </div>
                     <div className="chat-message-ai max-w-xs sm:max-w-sm lg:max-w-md">
                       <div className="flex items-center space-x-2">
@@ -586,7 +588,7 @@ export default function ClientChatPage({
             <div className="card w-full max-w-md p-4 sm:p-6">
               <div className="flex items-start space-x-4">
                 <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden bg-gradient-to-r ${monk.color} flex items-center justify-center flex-shrink-0`}>
-                  <Image src={monk.image} alt={`${monk.name}のアイコン`} width={56} height={56} className="w-full h-full object-cover" />
+                  <Image src={monkImageSrc} alt={`${monk.name}のアイコン`} width={56} height={56} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg sm:text-xl font-serif font-semibold" style={{ color: "var(--color-text-primary)" }}>{monk.name}</h3>
