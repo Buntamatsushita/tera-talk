@@ -11,7 +11,6 @@ import {
   X,
 } from "lucide-react";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import FavoriteButton from "@/components/FavoriteButton";
 
 interface SearchResult {
@@ -280,7 +279,8 @@ export default function SearchPage() {
                 onKeyDown={(e) => {
                   if (
                     e.key === "Enter" &&
-                    !((e.nativeEvent as unknown as { isComposing?: boolean }).isComposing)
+                    !(e.nativeEvent as unknown as { isComposing?: boolean })
+                      .isComposing
                   ) {
                     e.preventDefault();
                     handleSearch(query);
