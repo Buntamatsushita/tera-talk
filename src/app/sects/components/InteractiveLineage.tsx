@@ -184,7 +184,9 @@ export default function InteractiveLineage() {
                 return (
                   <div key={id} className="col-span-6 flex justify-center">
                     <button
-                      ref={(el) => (nodesRef.current[id] = el)}
+                      ref={(el) => {
+                        nodesRef.current[id] = el;
+                      }}
                       onFocus={() => setFocusedId(id)}
                       onMouseEnter={() => setFocusedId(id)}
                       onMouseLeave={() => setFocusedId(null)}
@@ -293,7 +295,9 @@ function renderNodeButton(
   const node = NODES.find(n => n.id === id)!;
   return (
     <button
-      ref={(el) => (nodesRef.current[id] = el)}
+      ref={(el) => {
+        nodesRef.current[id] = el;
+      }}
       onFocus={() => setFocusedId(id)}
       onMouseEnter={() => setFocusedId(id)}
       onMouseLeave={() => setFocusedId(null)}
