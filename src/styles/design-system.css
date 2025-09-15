@@ -149,11 +149,20 @@
   background-color: var(--color-sub-bg);
   border: 1px solid var(--color-border);
   box-shadow: 0 2px 12px var(--color-shadow);
+  text-decoration: none;
+  color: inherit;
 }
 
 .card:hover {
   box-shadow: 0 8px 24px var(--color-shadow);
   transform: translateY(-2px);
+  text-decoration: none;
+}
+
+/* カード内の個別リンクも下線を表示しない */
+.card a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* チャットUI */
@@ -457,4 +466,30 @@
 .btn-secondary,
 .btn-secondary-soft {
   text-decoration: none;
+}
+
+/* ---------------------------------------------
+   カード内リンクの装飾制御（content-rich の上書き）
+   --------------------------------------------- */
+.card a,
+.card .content-rich a {
+  text-decoration: none !important;
+  color: inherit;
+  text-underline-offset: 0;
+}
+
+/* Tailwind の underline ユーティリティをカード内では無効化 */
+.card .underline,
+.card a.underline,
+.card a:hover,
+.card a:focus,
+.card a:visited {
+  text-decoration: none !important;
+}
+
+/* カードを a 要素がラップしている場合の下線無効化 */
+.content-rich a:has(.card) {
+  text-decoration: none !important;
+  color: inherit;
+  text-underline-offset: 0;
 }
