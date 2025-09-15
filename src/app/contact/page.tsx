@@ -10,16 +10,22 @@ export default function ContactPage() {
     email: "",
     subject: "",
     message: "",
-    category: "general"
+    category: "general",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -34,22 +40,24 @@ export default function ContactPage() {
       const contactData = {
         ...formData,
         submittedAt: new Date().toISOString(),
-        id: Date.now().toString()
+        id: Date.now().toString(),
       };
 
-      const existingContacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+      const existingContacts = JSON.parse(
+        localStorage.getItem("contacts") || "[]"
+      );
       existingContacts.push(contactData);
-      localStorage.setItem('contacts', JSON.stringify(existingContacts));
+      localStorage.setItem("contacts", JSON.stringify(existingContacts));
 
       // 成功をシミュレート
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setSubmitStatus("success");
       setFormData({
         name: "",
         email: "",
         subject: "",
         message: "",
-        category: "general"
+        category: "general",
       });
     } catch (error) {
       setSubmitStatus("error");
@@ -67,22 +75,39 @@ export default function ContactPage() {
             <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-sm">仏</span>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Tera Talk</h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Tera Talk
+            </h1>
           </Link>
           <div className="hidden md:flex space-x-6">
-            <Link href="/learn" className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors">
+            <Link
+              href="/learn"
+              className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors"
+            >
               仏教思想を学ぶ
             </Link>
-            <Link href="/chat" className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors">
+            <Link
+              href="/chat"
+              className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors"
+            >
               AI僧侶に相談
             </Link>
-            <Link href="/sects" className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors">
+            <Link
+              href="/sects"
+              className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors"
+            >
               日本仏教宗派
             </Link>
-            <Link href="/search" className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors">
+            <Link
+              href="/search"
+              className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors"
+            >
               検索
             </Link>
-            <Link href="/favorites" className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors">
+            <Link
+              href="/favorites"
+              className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors"
+            >
               お気に入り
             </Link>
           </div>
@@ -94,8 +119,8 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto">
           {/* Back Button */}
           <div className="mb-8">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="flex items-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -120,8 +145,10 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Form */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">メッセージを送信</h3>
-              
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                メッセージを送信
+              </h3>
+
               {submitStatus === "success" && (
                 <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl">
                   <div className="flex items-center space-x-2">
@@ -152,8 +179,13 @@ export default function ContactPage() {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold mb-3 font-sans" style={{ color: 'var(--color-text-primary)' }}>
-                    お名前 <span style={{ color: 'var(--color-warning)' }}>*</span>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-semibold mb-3 font-sans"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
+                    お名前{" "}
+                    <span style={{ color: "var(--color-warning)" }}>*</span>
                   </label>
                   <input
                     type="text"
@@ -168,8 +200,13 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold mb-3 font-sans" style={{ color: 'var(--color-text-primary)' }}>
-                    メールアドレス <span style={{ color: 'var(--color-warning)' }}>*</span>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-semibold mb-3 font-sans"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
+                    メールアドレス{" "}
+                    <span style={{ color: "var(--color-warning)" }}>*</span>
                   </label>
                   <input
                     type="email"
@@ -184,7 +221,11 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="category" className="block text-sm font-semibold mb-3 font-sans" style={{ color: 'var(--color-text-primary)' }}>
+                  <label
+                    htmlFor="category"
+                    className="block text-sm font-semibold mb-3 font-sans"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
                     お問い合わせ種別
                   </label>
                   <select
@@ -204,8 +245,13 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-semibold mb-3 font-sans" style={{ color: 'var(--color-text-primary)' }}>
-                    件名 <span style={{ color: 'var(--color-warning)' }}>*</span>
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-semibold mb-3 font-sans"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
+                    件名{" "}
+                    <span style={{ color: "var(--color-warning)" }}>*</span>
                   </label>
                   <input
                     type="text"
@@ -220,8 +266,13 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-semibold mb-3 font-sans" style={{ color: 'var(--color-text-primary)' }}>
-                    メッセージ <span style={{ color: 'var(--color-warning)' }}>*</span>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-semibold mb-3 font-sans"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
+                    メッセージ{" "}
+                    <span style={{ color: "var(--color-warning)" }}>*</span>
                   </label>
                   <textarea
                     id="message"
@@ -258,24 +309,32 @@ export default function ContactPage() {
             {/* Contact Info */}
             <div className="space-y-8">
               <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">お問い合わせについて</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                  お問い合わせについて
+                </h3>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">回答時間</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                      回答時間
+                    </h4>
                     <p className="text-gray-600 dark:text-gray-300">
                       お問い合わせいただいた内容について、通常3営業日以内に回答いたします。
                       お急ぎの場合は、件名に「緊急」と記載してください。
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">よくある質問</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                      よくある質問
+                    </h4>
                     <p className="text-gray-600 dark:text-gray-300">
                       技術的な問題や一般的なご質問については、
                       サイト内の情報やFAQをご確認いただくことで解決できる場合があります。
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">プライバシー</h4>
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                      プライバシー
+                    </h4>
                     <p className="text-gray-600 dark:text-gray-300">
                       お問い合わせいただいた内容は、回答の目的のみに使用し、
                       第三者に提供することはありません。
@@ -285,13 +344,17 @@ export default function ContactPage() {
               </div>
 
               <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">関連リンク</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                  関連リンク
+                </h3>
                 <div className="space-y-4">
                   <Link
                     href="/privacy"
                     className="block p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
                   >
-                    <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-1">プライバシーポリシー</h4>
+                    <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-1">
+                      プライバシーポリシー
+                    </h4>
                     <p className="text-blue-700 dark:text-blue-300 text-sm">
                       個人情報の取り扱いについて
                     </p>
@@ -300,7 +363,9 @@ export default function ContactPage() {
                     href="/terms"
                     className="block p-4 bg-green-50 dark:bg-green-900/20 rounded-xl hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors"
                   >
-                    <h4 className="font-semibold text-green-900 dark:text-green-200 mb-1">利用規約</h4>
+                    <h4 className="font-semibold text-green-900 dark:text-green-200 mb-1">
+                      利用規約
+                    </h4>
                     <p className="text-green-700 dark:text-green-300 text-sm">
                       サービスの利用条件について
                     </p>
@@ -309,7 +374,9 @@ export default function ContactPage() {
                     href="/sitemap"
                     className="block p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-colors"
                   >
-                    <h4 className="font-semibold text-purple-900 dark:text-purple-200 mb-1">サイトマップ</h4>
+                    <h4 className="font-semibold text-purple-900 dark:text-purple-200 mb-1">
+                      サイトマップ
+                    </h4>
                     <p className="text-purple-700 dark:text-purple-300 text-sm">
                       サイト内のすべてのページ
                     </p>
@@ -320,13 +387,6 @@ export default function ContactPage() {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="container mx-auto px-4 py-8 border-t border-gray-200 dark:border-gray-700">
-        <div className="text-center text-gray-600 dark:text-gray-400">
-          <p>&copy; 2024 Tera Talk. 仏教の教えを通じて、心の安らぎを。</p>
-        </div>
-      </footer>
     </div>
   );
 }

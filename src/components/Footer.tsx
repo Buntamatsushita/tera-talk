@@ -21,7 +21,7 @@ export default function Footer() {
           </nav>
         </div>
         <p className="font-sans text-xs sm:text-sm px-4" style={{ color: 'var(--color-text-primary)' }}>
-          &copy; 2024 Tera Talk. 仏教の教えを通じて、心の安らぎを。
+          &copy; 2025 Tera Talk. 仏教の教えを通じて、心の安らぎを。
         </p>
       </div>
     </footer>

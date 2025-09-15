@@ -282,13 +282,6 @@ export default function TermsPage() {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="container mx-auto px-4 py-8 border-t border-gray-200 dark:border-gray-700">
-        <div className="text-center text-gray-600 dark:text-gray-400">
-          <p>&copy; 2024 Tera Talk. 仏教の教えを通じて、心の安らぎを。</p>
-        </div>
-      </footer>
     </div>
   );
 }
