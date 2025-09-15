@@ -244,20 +244,21 @@ export function generateStaticParams() {
   return Object.keys(buddhistConcepts).map((slug) => ({ slug }));
 }
 
-export default function ConceptDetailPage({
+export default async function ConceptDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const concept =
-    buddhistConcepts[params.slug as keyof typeof buddhistConcepts];
+    buddhistConcepts[slug as keyof typeof buddhistConcepts];
 
   if (!concept) {
     notFound();
   }
 
   const conceptKeys = Object.keys(buddhistConcepts);
-  const currentIndex = conceptKeys.indexOf(params.slug);
+  const currentIndex = conceptKeys.indexOf(slug);
   const prevSlug = currentIndex > 0 ? conceptKeys[currentIndex - 1] : null;
   const nextSlug =
     currentIndex < conceptKeys.length - 1

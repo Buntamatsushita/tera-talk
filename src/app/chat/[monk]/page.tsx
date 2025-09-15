@@ -6,10 +6,11 @@ export function generateStaticParams() {
   return Object.keys(monks).map((monk) => ({ monk }));
 }
 
-export default function Page({ params }: { params: { monk: string } }) {
-  const monk = monks[params.monk as keyof typeof monks];
+export default async function Page({ params }: { params: Promise<{ monk: string }> }) {
+  const { monk: monkKey } = await params;
+  const monk = monks[monkKey as keyof typeof monks];
   if (!monk) {
     notFound();
   }
-  return <ClientChatPage monk={monk} monkKey={params.monk} />;
+  return <ClientChatPage monk={monk} monkKey={monkKey} />;
 }

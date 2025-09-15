@@ -7,8 +7,9 @@ export function generateStaticParams() {
   return Object.keys(monks).map((monk) => ({ monk }));
 }
 
-export default function SummaryPage({ params }: { params: { monk: MonkKey } }) {
-  const monk = monks[params.monk];
+export default async function SummaryPage({ params }: { params: Promise<{ monk: MonkKey }> }) {
+  const { monk: monkKey } = await params;
+  const monk = monks[monkKey];
   if (!monk) notFound();
 
   const summary: { items: string[]; reflection: string } = {
@@ -17,7 +18,7 @@ export default function SummaryPage({ params }: { params: { monk: MonkKey } }) {
   };
   if (typeof window !== "undefined") {
     try {
-      const raw = window.sessionStorage.getItem("tt:chat:" + params.monk);
+      const raw = window.sessionStorage.getItem("tt:chat:" + monkKey);
       if (raw) {
         const data = JSON.parse(raw) as { user: string[] };
         summary.items = data.user.slice(-3);
@@ -42,7 +43,7 @@ export default function SummaryPage({ params }: { params: { monk: MonkKey } }) {
       <header className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
         <nav className="flex items-center justify-between">
           <Link
-            href={`/chat/${params.monk}`}
+            href={`/chat/${monkKey}`}
             className="hover:opacity-80"
             style={{ color: "var(--color-text-primary)" }}
           >
@@ -135,7 +136,7 @@ export default function SummaryPage({ params }: { params: { monk: MonkKey } }) {
 
           <div className="flex items-center justify-between">
             <Link
-              href={`/chat/${params.monk}`}
+              href={`/chat/${monkKey}`}
               className="btn-primary px-4 py-2"
             >
               続ける

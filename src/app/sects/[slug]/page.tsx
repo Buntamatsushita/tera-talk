@@ -361,8 +361,9 @@ export function generateStaticParams() {
   return Object.keys(sects).map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const sect = sects[params.slug as keyof typeof sects];
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const sect = sects[slug as keyof typeof sects];
   if (!sect) {
     return { title: "宗派 | Tera Talk" };
   }
@@ -372,15 +373,16 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function SectDetailPage({ params }: { params: { slug: string } }) {
-  const sect = sects[params.slug as keyof typeof sects];
+export default async function SectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const sect = sects[slug as keyof typeof sects];
   
   if (!sect) {
     notFound();
   }
 
   const sectKeys = Object.keys(sects);
-  const currentIndex = sectKeys.indexOf(params.slug);
+  const currentIndex = sectKeys.indexOf(slug);
   const prevSlug = currentIndex > 0 ? sectKeys[currentIndex - 1] : null;
   const nextSlug = currentIndex < sectKeys.length - 1 ? sectKeys[currentIndex + 1] : null;
 
