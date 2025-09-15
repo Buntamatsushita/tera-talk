@@ -49,6 +49,7 @@ const monks = [
 ];
 
 export default function ChatPage() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   return (
     <PageLayout currentPage="chat">
       <div className="max-w-4xl mx-auto">
@@ -79,7 +80,7 @@ export default function ChatPage() {
               <div className="flex items-start space-x-6">
                 <div className="w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-accent)' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={monk.image} alt={`${monk.name}のアイコン`} className="w-full h-full object-cover" />
+                  <img src={`${basePath}${monk.image}`} alt={`${monk.name}のアイコン`} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-4">
