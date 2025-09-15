@@ -35,8 +35,7 @@ export default function CharacterFigure({
   sizesOverride?: string;
   fitParentHeight?: boolean;
 }) {
-  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-  const src = `${base}/charactor/howamaru_${name}.png`;
+  const src = `charactor/howamaru_${name}.png`;
   const dims = (() => {
     if (typeof width === "number" && typeof height === "number") {
       return { w: width, h: height };

@@ -1,12 +1,10 @@
-const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
 export const monks = {
   shaka: {
     name: "釈迦",
     title: "仏教の開祖",
     icon: "釈",
     color: "from-yellow-500 to-orange-600",
-    image: `${base}/icons/shaka.png`,
+    image: `icons/shaka.png`,
     bio:
       "紀元前5世紀頃のインドの思想家。苦の原因と終息、そして道（八正道）を示し、慈悲と智慧による解放を説いた。日常の実践を重視し、執着を手放すことの大切さを示す。",
     prompt:
@@ -17,7 +15,7 @@ export const monks = {
     title: "真言宗の開祖",
     icon: "空",
     color: "from-purple-500 to-indigo-600",
-    image: `${base}/icons/kukai.png`,
+    image: `icons/kukai.png`,
     bio:
       "平安時代の僧。言語・象徴を用いた密教実践を体系化し、現世利益と精神的成長の両立を説いた。書・土木・教育など多方面で活躍し、調和の智慧を示した。",
     prompt:
@@ -28,7 +26,7 @@ export const monks = {
     title: "曹洞宗の開祖",
     icon: "道",
     color: "from-green-500 to-teal-600",
-    image: `${base}/icons/dogen.png`,
+    image: `icons/dogen.png`,
     bio:
       "鎌倉時代の禅僧。只管打坐を中心に、坐ることそのものを道とする実践を説いた。『正法眼蔵』で日常の中の仏法を豊かに紡ぎ、今ここに生きることを示した。",
     prompt:
