@@ -1,0 +1,362 @@
+/* Tera Talk デザインシステム */
+
+/* カラーパレット - 日本の伝統色 */
+:root {
+  /* ベース背景 - 生成り色 (きなりいろ) */
+  --color-base-bg: #FBFAF7;
+  
+  /* サブ背景 - 石庭鼠 (せきていねず) */
+  --color-sub-bg: #EAE8E3;
+  
+  /* メインテキスト - 墨色 (すみいろ) - WCAG AA準拠 */
+  --color-text-primary: #2D2A24;
+  
+  /* アクセント - 朽葉色 (くちばいろ) - WCAG AA準拠 */
+  --color-accent: #B5845A;
+  --color-accent-hover: #A6754A;
+  
+  /* 成功・肯定 - 苔色 (こけいろ) - WCAG AA準拠 */
+  --color-success: #4A6B56;
+  --color-success-light: #5C7C68;
+  
+  /* 警告・否定 - 茜色 (あかねいろ) - WCAG AA準拠 */
+  --color-warning: #A03D3D;
+  --color-warning-light: #B54D4D;
+  
+  /* その他の色 - WCAG AA準拠 */
+  --color-border: #C4BEB5;
+  --color-shadow: rgba(0, 0, 0, 0.08);
+  
+  /* グラデーション背景用の色 */
+  --color-gradient-start: #FBFAF7;
+  --color-gradient-end: #EAE8E3;
+}
+
+/* タイポグラフィ */
+.font-serif {
+  font-family: 'Noto Serif JP', serif;
+}
+
+.font-sans {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* 見出しスタイル */
+.heading-primary {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.heading-secondary {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.875rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.heading-tertiary {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+}
+
+/* 本文スタイル */
+.body-text {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  letter-spacing: 0.01em;
+}
+
+.body-text-lg {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  letter-spacing: 0.01em;
+}
+
+/* ボタンスタイル */
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  color: white;
+  transition: all 0.3s ease;
+  background-color: var(--color-accent);
+  box-shadow: 0 2px 8px var(--color-shadow);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+  box-shadow: 0 4px 12px var(--color-shadow);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid var(--color-text-primary);
+  color: var(--color-text-primary);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-text-primary);
+  color: var(--color-base-bg);
+}
+
+/* カードスタイル */
+.card {
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  background-color: var(--color-sub-bg);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 12px var(--color-shadow);
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px var(--color-shadow);
+  transform: translateY(-2px);
+}
+
+/* チャットUI */
+.chat-message-ai {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: var(--color-sub-bg);
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+.chat-message-user {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  max-width: 24rem;
+  background-color: var(--color-accent);
+  color: white;
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+/* フォーム要素 */
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+  background-color: var(--color-sub-bg);
+  color: var(--color-text-primary);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+}
+
+/* アニメーション */
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+  .heading-primary {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+  
+  .heading-secondary {
+    font-size: 1.25rem;
+  }
+  
+  .heading-tertiary {
+    font-size: 1.25rem;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
+  
+  .body-text-lg {
+    font-size: 1rem;
+  }
+  
+  .btn-primary {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .btn-secondary {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .form-input {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+  }
+  
+  .chat-message-user,
+  .chat-message-ai {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* タッチフレンドリーなUI */
+@media (hover: none) and (pointer: coarse) {
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: none;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
+  
+  .group-hover\:transform:hover {
+    transform: none;
+  }
+  
+  .group-hover\:scale-105:hover {
+    transform: none;
+  }
+  
+  .group-hover\:translate-x-2:hover {
+    transform: none;
+  }
+}
+
+/* モバイルでのタップ領域の拡大 */
+@media (max-width: 768px) {
+  button, 
+  .btn-primary, 
+  .btn-secondary,
+  a[role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  input, 
+  textarea, 
+  select {
+    min-height: 44px;
+  }
+}
+
+
+/* アクセシビリティの改善 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* スキップリンク */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-accent);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* 高コントラストモード対応 */
+@media (prefers-contrast: high) {
+  .card {
+    border: 2px solid var(--color-text-primary);
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    border: 2px solid var(--color-text-primary);
+  }
+  
+  .form-input {
+    border: 2px solid var(--color-text-primary);
+  }
+}
+
+/* アニメーション無効化 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .fade-in,
+  .slide-up {
+    animation: none;
+  }
+  
+  .group-hover\:transform:hover,
+  .group-hover\:scale-105:hover,
+  .group-hover\:translate-x-2:hover {
+    transform: none;
+  }
+}

@@ -1,8 +1,9 @@
 @import "tailwindcss";
+@import "../styles/design-system.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-base-bg);
+  --foreground: var(--color-text-primary);
 }
 
 @theme inline {
@@ -12,15 +13,31 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.6;
+}
+
+/* デザインシステムの基本スタイル */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* フォーカススタイル */
+*:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* 選択時のスタイル */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
 }
