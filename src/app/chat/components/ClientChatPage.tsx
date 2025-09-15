@@ -259,8 +259,16 @@ export default function ClientChatPage({
               if (e.key === "Enter" || e.key === " ") setIsProfileOpen(true);
             }}
           >
-            <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gradient-to-r ${monk.color} flex items-center justify-center`}>
-              <Image src={monkImageSrc} alt={`${monk.name}のアイコン`} width={32} height={32} className="w-full h-full object-cover" />
+            <div
+              className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gradient-to-r ${monk.color} flex items-center justify-center`}
+            >
+              <Image
+                src={monkImageSrc}
+                alt={`${monk.name}のアイコン`}
+                width={32}
+                height={32}
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <h1
@@ -419,8 +427,16 @@ export default function ClientChatPage({
                     </div>
                   ) : (
                     <div className="flex items-start space-x-3">
-                      <div className={`w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-r ${monk.color}`}>
-                        <Image src={monkImageSrc} alt={`${monk.name}のアイコン`} width={32} height={32} className="w-full h-full object-cover" />
+                      <div
+                        className={`w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-r ${monk.color}`}
+                      >
+                        <Image
+                          src={monkImageSrc}
+                          alt={`${monk.name}のアイコン`}
+                          width={32}
+                          height={32}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div className="chat-message-ai max-w-xs sm:max-w-sm lg:max-w-md">
                         <p className="text-sm leading-relaxed">
@@ -441,8 +457,16 @@ export default function ClientChatPage({
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="flex items-start space-x-3">
-                    <div className={`w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-r ${monk.color}`}>
-                      <Image src={monkImageSrc} alt={`${monk.name}のアイコン`} width={32} height={32} className="w-full h-full object-cover" />
+                    <div
+                      className={`w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-r ${monk.color}`}
+                    >
+                      <Image
+                        src={monkImageSrc}
+                        alt={`${monk.name}のアイコン`}
+                        width={32}
+                        height={32}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="chat-message-ai max-w-xs sm:max-w-sm lg:max-w-md">
                       <div className="flex items-center space-x-2">
@@ -486,20 +510,6 @@ export default function ClientChatPage({
           </div>
         </div>
       </main>
-
-      <footer
-        className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 border-t"
-        style={{ borderColor: "var(--color-border)" }}
-      >
-        <div className="text-center">
-          <p
-            className="font-sans text-sm"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            &copy; 2024 Tera Talk. 仏教の教えを通じて、心の安らぎを。
-          </p>
-        </div>
-      </footer>
 
       {/* Tutorial Overlay */}
       {isTourOpen && (
@@ -587,16 +597,37 @@ export default function ClientChatPage({
           <div className="absolute inset-0 flex items-center justify-center p-4">
             <div className="card w-full max-w-md p-4 sm:p-6">
               <div className="flex items-start space-x-4">
-                <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden bg-gradient-to-r ${monk.color} flex items-center justify-center flex-shrink-0`}>
-                  <Image src={monkImageSrc} alt={`${monk.name}のアイコン`} width={56} height={56} className="w-full h-full object-cover" />
+                <div
+                  className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden bg-gradient-to-r ${monk.color} flex items-center justify-center flex-shrink-0`}
+                >
+                  <Image
+                    src={monkImageSrc}
+                    alt={`${monk.name}のアイコン`}
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg sm:text-xl font-serif font-semibold" style={{ color: "var(--color-text-primary)" }}>{monk.name}</h3>
-                  <p className="text-sm sm:text-base opacity-80" style={{ color: "var(--color-text-primary)" }}>{monk.title}</p>
+                  <h3
+                    className="text-lg sm:text-xl font-serif font-semibold"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
+                    {monk.name}
+                  </h3>
+                  <p
+                    className="text-sm sm:text-base opacity-80"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
+                    {monk.title}
+                  </p>
                 </div>
               </div>
               {monk.bio && (
-                <p className="mt-4 text-sm sm:text-base font-sans leading-relaxed" style={{ color: "var(--color-text-primary)" }}>
+                <p
+                  className="mt-4 text-sm sm:text-base font-sans leading-relaxed"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   {monk.bio}
                 </p>
               )}
@@ -604,7 +635,10 @@ export default function ClientChatPage({
                 <button
                   type="button"
                   className="px-3 py-1.5 rounded-md border text-sm sm:text-base hover:opacity-90"
-                  style={{ borderColor: "var(--color-border)", color: "var(--color-text-primary)" }}
+                  style={{
+                    borderColor: "var(--color-border)",
+                    color: "var(--color-text-primary)",
+                  }}
                   onClick={() => setIsProfileOpen(false)}
                 >
                   閉じる

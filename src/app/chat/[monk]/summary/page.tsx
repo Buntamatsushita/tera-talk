@@ -155,6 +155,47 @@ export default async function SummaryPage({ params }: { params: Promise<{ monk: 
           </div>
         </div>
       </main>
+      {/* Under Construction Overlay */}
+      <div
+        className="fixed inset-0 z-50"
+        aria-live="polite"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundColor: "rgba(251, 250, 247, 0.55)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
+          }}
+        />
+        <div className="relative z-10 h-full w-full flex items-center justify-center px-4">
+          <div
+            className="w-full max-w-xl rounded-2xl p-8 text-center shadow-xl"
+            style={{
+              backgroundColor: "var(--color-base-bg)",
+              border: "1px solid var(--color-border)",
+            }}
+          >
+            <h2 className="heading-secondary mb-2">サマリー機能は準備中です</h2>
+            <p className="body-text mb-6">
+              ただいま工事中のため、一時的にご利用いただけません。近日公開予定です。
+            </p>
+            <div className="flex items-center justify-center gap-3">
+              <Link href={`/chat/${monkKey}`} className="btn-secondary-soft">
+                対話に戻る
+              </Link>
+              <span
+                className="font-sans text-sm"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                しばらくお待ちください
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

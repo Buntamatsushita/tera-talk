@@ -25,41 +25,44 @@ const monks = [
     slug: "shaka",
     name: monkDefs.shaka.name,
     title: monkDefs.shaka.title,
-    description: "普遍的かつ根本的な教えに基づいた回答をします。人生の根本的な悩みや、仏教の基本的な教えについて相談できます。",
+    description:
+      "普遍的かつ根本的な教えに基づいた回答をします。人生の根本的な悩みや、仏教の基本的な教えについて相談できます。",
     image: monkDefs.shaka.image,
     characteristics: [
       "慈悲深く、すべての生き物を平等に愛する",
       "智慧に満ちた教えで根本的な解決を示す",
       "四諦八正道に基づいた実践的な助言",
-      "執着を手放すことの大切さを説く"
-    ]
+      "執着を手放すことの大切さを説く",
+    ],
   },
   {
     slug: "kukai",
     name: monkDefs.kukai.name,
     title: monkDefs.kukai.title,
-    description: "密教の視点から、現実世界での実践的な助言を与えます。修行や瞑想、現世での成功について相談できます。",
+    description:
+      "密教の視点から、現実世界での実践的な助言を与えます。修行や瞑想、現世での成功について相談できます。",
     image: monkDefs.kukai.image,
     characteristics: [
       "密教の深い智慧と実践的な教え",
       "現世での成功と精神的な成長の両立",
       "真言（マントラ）による心の浄化",
-      "宇宙との一体感を重視する"
-    ]
+      "宇宙との一体感を重視する",
+    ],
   },
   {
     slug: "dogen",
     name: monkDefs.dogen.name,
     title: monkDefs.dogen.title,
-    description: "禅の思想に基づき、自己との向き合い方を諭します。瞑想、坐禅、自己探求について相談できます。",
+    description:
+      "禅の思想に基づき、自己との向き合い方を諭します。瞑想、坐禅、自己探求について相談できます。",
     image: monkDefs.dogen.image,
     characteristics: [
       "只管打坐（ただひたすら坐る）の教え",
       "今この瞬間を大切にする生き方",
       "自己と向き合う深い内省",
-      "自然との調和を重視する"
-    ]
-  }
+      "自然との調和を重視する",
+    ],
+  },
 ];
 
 export default function ChatPage() {
@@ -67,7 +70,10 @@ export default function ChatPage() {
   return (
     <PageLayout currentPage="chat">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16 relative" style={{ minHeight: "140px" }}>
+        <div
+          className="text-center mb-16 relative"
+          style={{ minHeight: "140px" }}
+        >
           <CharacterFigure
             name="welcome"
             decorative
@@ -77,9 +83,7 @@ export default function ChatPage() {
             sizesOverride="(max-width: 1024px) 30vw, 150px"
             fitParentHeight
           />
-          <h2 className="heading-primary mb-6">
-            AI僧侶に相談
-          </h2>
+          <h2 className="heading-primary mb-6">AI僧侶に相談</h2>
           <p className="body-text-lg leading-relaxed">
             著名な僧侶を模したAIに、あなたの悩みや疑問を相談できます。
             <br />
@@ -92,19 +96,22 @@ export default function ChatPage() {
           {monks.map((monk) => (
             <Card key={monk.slug} className="group-hover:scale-105">
               <div className="flex items-start space-x-6">
-                <div className="w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-accent)' }}>
+                <div
+                  className="w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: "var(--color-accent)" }}
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`${basePath}${monk.image}`} alt={`${monk.name}のアイコン`} className="w-full h-full object-cover" />
+                  <img
+                    src={`${basePath}${monk.image}`}
+                    alt={`${monk.name}のアイコン`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center space-x-3">
-                      <h3 className="heading-secondary">
-                        {monk.name}
-                      </h3>
-                      <span className="body-text-lg">
-                        {monk.title}
-                      </span>
+                      <h3 className="heading-secondary">{monk.name}</h3>
+                      <span className="body-text-lg">{monk.title}</span>
                     </div>
                     <FavoriteButton
                       id={`monk:/chat/${monk.slug}`}
@@ -112,7 +119,7 @@ export default function ChatPage() {
                       title={monk.name}
                       description={monk.description}
                       url={`/chat/${monk.slug}`}
-                      icon={monk.name.substring(0,1)}
+                      icon={monk.name.substring(0, 1)}
                       color={"from-green-500 to-green-600"}
                     />
                   </div>
@@ -120,7 +127,10 @@ export default function ChatPage() {
                     <p className="body-text mb-6 leading-relaxed">
                       {monk.description}
                     </p>
-                    <div className="flex items-center font-semibold group-hover:translate-x-2 transition-transform" style={{ color: 'var(--color-success)' }}>
+                    <div
+                      className="flex items-center font-semibold group-hover:translate-x-2 transition-transform"
+                      style={{ color: "var(--color-success)" }}
+                    >
                       相談を始める
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </div>
@@ -134,36 +144,109 @@ export default function ChatPage() {
         {/* Consultation Tips */}
         <Card className="mt-16">
           <div className="flex items-center mb-6">
-            <MessageCircle className="w-8 h-8 mr-3" style={{ color: 'var(--color-success)' }} />
+            <MessageCircle
+              className="w-8 h-8 mr-3"
+              style={{ color: "var(--color-success)" }}
+            />
             <h3 className="heading-secondary">相談のコツ</h3>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 className="font-semibold mb-2" style={{ color: 'var(--color-text-primary)' }}>1. 具体的に相談する</h4>
+              <h4
+                className="font-semibold mb-2"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                1. 具体的に相談する
+              </h4>
               <p className="body-text">
                 悩みや疑問を具体的に説明することで、より適切な助言を得ることができます。
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-2" style={{ color: 'var(--color-text-primary)' }}>2. 僧侶を選ぶ</h4>
+              <h4
+                className="font-semibold mb-2"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                2. 僧侶を選ぶ
+              </h4>
               <p className="body-text">
                 それぞれの僧侶には異なる特徴があります。相談内容に応じて適切な僧侶を選びましょう。
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-2" style={{ color: 'var(--color-text-primary)' }}>3. 継続的に相談する</h4>
+              <h4
+                className="font-semibold mb-2"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                3. 継続的に相談する
+              </h4>
               <p className="body-text">
                 一度の相談で解決しない場合も、継続的に相談することで理解が深まります。
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-2" style={{ color: 'var(--color-text-primary)' }}>4. 実践を心がける</h4>
+              <h4
+                className="font-semibold mb-2"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                4. 実践を心がける
+              </h4>
               <p className="body-text">
                 得られた助言を実際の生活で実践することで、より深い理解と変化を得られます。
               </p>
             </div>
           </div>
         </Card>
+      </div>
+      {/* Under Construction Overlay */}
+      <div
+        className="fixed inset-0 z-50"
+        aria-live="polite"
+        role="dialog"
+        aria-modal="true"
+      >
+        {/* Backdrop */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundColor: "rgba(251, 250, 247, 0.55)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
+          }}
+        />
+        {/* Modal container */}
+        <div className="relative z-10 h-full w-full flex items-center justify-center px-4">
+          <div
+            className="w-full max-w-xl rounded-2xl p-8 text-center shadow-xl"
+            style={{
+              backgroundColor: "var(--color-base-bg)",
+              border: "1px solid var(--color-border)",
+            }}
+          >
+            <div
+              className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center"
+              style={{ backgroundColor: "var(--color-accent)" }}
+              aria-hidden="true"
+            >
+              <MessageCircle className="w-8 h-8" style={{ color: "#ffffff" }} />
+            </div>
+            <h2 className="heading-secondary mb-2">AI僧侶に相談は準備中です</h2>
+            <p className="body-text mb-6">
+              ただいま工事中のため、一時的にご利用いただけません。近日公開予定です。
+            </p>
+            <div className="flex items-center justify-center gap-3">
+              <Link href="/" className="btn-secondary-soft">
+                ホームへ戻る
+              </Link>
+              <span
+                className="font-sans text-sm"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                しばらくお待ちください
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </PageLayout>
   );
