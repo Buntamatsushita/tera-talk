@@ -1,14 +1,24 @@
 import Link from "next/link";
 import { Home, Search } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import CharacterFigure from "@/components/CharacterFigure";
 
 export default function NotFound() {
   return (
     <PageLayout>
-      <div className="min-h-[65vh] grid place-items-center px-4 fade-in">
+      <div className="min-h-[65vh] grid place-items-center px-4 fade-in relative">
         <div className="max-w-xl w-full text-center">
           {/* Card */}
           <div className="card">
+            <div className="flex justify-center mb-4">
+              <CharacterFigure
+                name="bow"
+                decorative
+                width={100}
+                height={100}
+                sizesOverride="(max-width: 1024px) 30vw, 100px"
+              />
+            </div>
             <div
               className="mb-2 font-serif"
               style={{

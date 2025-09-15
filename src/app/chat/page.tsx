@@ -4,6 +4,7 @@ import FavoriteButton from "@/components/FavoriteButton";
 import PageLayout from "@/components/PageLayout";
 import Card from "@/components/Card";
 import { monks as monkDefs } from "@/app/chat/monks";
+import CharacterFigure from "@/components/CharacterFigure";
 
 const monks = [
   {
@@ -51,7 +52,16 @@ export default function ChatPage() {
   return (
     <PageLayout currentPage="chat">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 relative" style={{ minHeight: "140px" }}>
+          <CharacterFigure
+            name="welcome"
+            decorative
+            className="hidden md:block absolute right-0 top-0 h-full pointer-events-none select-none"
+            width={150}
+            height={150}
+            sizesOverride="(max-width: 1024px) 30vw, 150px"
+            fitParentHeight
+          />
           <h2 className="heading-primary mb-6">
             AI僧侶に相談
           </h2>

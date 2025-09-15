@@ -3,6 +3,7 @@ import { BookOpen, MessageCircle, Users, ArrowRight } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import Card from "@/components/Card";
 import IntroOverlay from "@/components/IntroOverlay";
+import CharacterFigure from "@/components/CharacterFigure";
 
 export default function Home() {
   return (
@@ -10,15 +11,26 @@ export default function Home() {
       {/* Intro Overlay (client-only mount handled in component below) */}
       <IntroOverlay />
       <div className="text-center max-w-5xl mx-auto">
-        <h2 className="heading-primary mb-6 sm:mb-8 px-4">
-          いつでも、どこでも、
-          <br />
-          <span style={{ color: "var(--color-accent)" }}>ほとけの教えを</span>
-        </h2>
-        <p className="body-text-lg mb-12 sm:mb-16 max-w-3xl mx-auto px-4">
-          仏教の普遍的な思想や教えを現代のテクノロジーを通じて分かりやすく提供し、
-          AI僧侶への相談機能で、あなたの心の安らぎを見つけましょう。
-        </p>
+        <div className="relative" style={{ minHeight: "160px" }}>
+          <CharacterFigure
+            name="welcome"
+            decorative
+            className="hidden md:block absolute  top-0 translate-y-0 pointer-events-none select-none h-full"
+            width={160}
+            height={160}
+            sizesOverride="(max-width: 1024px) 30vw, 160px"
+            fitParentHeight
+          />
+          <h2 className="heading-primary mb-6 sm:mb-8 px-4">
+            いつでも、どこでも、
+            <br />
+            <span style={{ color: "var(--color-accent)" }}>ほとけの教えを</span>
+          </h2>
+          <p className="body-text-lg mb-12 sm:mb-16 max-w-3xl mx-auto px-4">
+            仏教の普遍的な思想や教えを現代のテクノロジーを通じて分かりやすく提供し、
+            AI僧侶への相談機能で、あなたの心の安らぎを見つけましょう。
+          </p>
+        </div>
 
         {/* Feature Cards */}
         <div
