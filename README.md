@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tera Talk - いつでも、どこでも、ほとけの教えを
 
-## Getting Started
+仏教の普遍的な思想や教えを現代のテクノロジーを通じて分かりやすく提供し、AI僧侶への相談機能も利用できるサイトです。
 
-First, run the development server:
+## 機能
+
+### 1. 仏教思想学習機能
+- 四苦八苦、諸行無常、諸法無我、涅槃寂静などの基本的な仏教概念を学べます
+- 各テーマについて、図解や平易な文章で解説しています
+
+### 2. AI僧侶への相談機能
+- 釈迦、空海、道元など、著名な僧侶を模したAIに悩みを相談できます
+- Google Gemini APIを使用して、各僧侶の特徴に応じた回答を生成します
+
+### 3. 日本仏教宗派学習機能
+- 天台宗、真言宗、浄土宗、浄土真宗、臨済宗、曹洞宗、日蓮宗などの主要な宗派について学べます
+- 各宗派の開祖、教え、修行法、歴史的影響について詳しく解説しています
+
+## 技術仕様
+
+- **フレームワーク**: Next.js 15 (App Router)
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS
+- **フォント**: Geist Sans / Geist Mono
+- **AI**: Google Gemini API
+- **アイコン**: Lucide React
+
+## セットアップ
+
+### 1. 依存関係のインストール
+
+```bash
+npm install
+```
+
+### 2. 環境変数の設定
+
+`.env.local` ファイルを作成し、Google Gemini APIキーを設定してください：
+
+```bash
+# .env.local
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+Google Gemini APIキーは [Google AI Studio](https://makersuite.google.com/app/apikey) で取得できます。
+
+### 3. 開発サーバーの起動
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてサイトを確認できます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## デプロイ
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Vercel（推奨）
 
-## Learn More
+1. [Vercel](https://vercel.com) にアカウントを作成
+2. GitHubリポジトリを接続
+3. 環境変数 `GEMINI_API_KEY` を設定
+4. デプロイ
 
-To learn more about Next.js, take a look at the following resources:
+### GitHub Pages
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+GitHub Pagesを使用する場合は、Cloudflare Workersなどのサーバーレス関数を別途用意し、そこからGemini APIを呼び出す構成への変更を推奨します。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 注意事項
 
-## Deploy on Vercel
+- APIキーは絶対にクライアントサイドに露出させないでください
+- 本番環境では、Vercel Functions（API Routes）を活用してGemini APIを呼び出す構成を強く推奨します
+- 開発段階では`.env.local`ファイルで管理し、公開リポジトリに含めないように注意してください
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 今後の展望
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **相談履歴の保存機能**: ユーザーが過去の相談内容を振り返れるように、ローカルストレージやログイン機能と連携したデータベースへの保存機能を追加
+- **コンテンツの拡充**: 仏像の種類や仏教美術に関する解説、お経の現代語訳など、学習コンテンツをさらに充実
+- **多言語対応**: 日本語だけでなく、英語など他の言語にも対応し、より多くのユーザーに利用してもらえるように
+
+## ライセンス
+
+MIT License
+
+## 貢献
+
+プルリクエストやイシューの報告を歓迎します。大きな変更を行う場合は、まずイシューを作成して変更内容を議論してください。
+
+---
+
+© 2024 Tera Talk. 仏教の教えを通じて、心の安らぎを。
