@@ -1,9 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Users, ArrowRight, BookOpen } from "lucide-react";
 import FavoriteButton from "@/components/FavoriteButton";
 import PageLayout from "@/components/PageLayout";
 import Card from "@/components/Card";
 import InteractiveLineage from "./components/InteractiveLineage";
+
+export const metadata: Metadata = {
+  title: "日本仏教宗派 | Tera Talk",
+  description:
+    "天台・真言・禅・浄土・日蓮など主要宗派の成り立ちや思想の特徴を体系的に整理します。",
+  alternates: { canonical: "/sects" },
+  openGraph: {
+    title: "日本仏教宗派 | Tera Talk",
+    description:
+      "天台・真言・禅・浄土・日蓮など主要宗派の成り立ちや思想の特徴を体系的に整理します。",
+    url: "/sects",
+  },
+};
 
 const sects = [
   {

@@ -1,9 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
 import FavoriteButton from "@/components/FavoriteButton";
 import PageLayout from "@/components/PageLayout";
 import Card from "@/components/Card";
 import CharacterFigure from "@/components/CharacterFigure";
+
+export const metadata: Metadata = {
+  title: "仏教思想を学ぶ | Tera Talk",
+  description:
+    "四苦八苦・諸行無常・縁起・空などの仏教の基本思想を図解と平易な文章で学べます。",
+  alternates: { canonical: "/learn" },
+  openGraph: {
+    title: "仏教思想を学ぶ | Tera Talk",
+    description:
+      "四苦八苦・諸行無常・縁起・空などの仏教の基本思想を図解と平易な文章で学べます。",
+    url: "/learn",
+  },
+};
 
 const buddhistConcepts = [
   {

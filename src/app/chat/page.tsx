@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { MessageCircle, ArrowRight } from "lucide-react";
 import FavoriteButton from "@/components/FavoriteButton";
@@ -5,6 +6,19 @@ import PageLayout from "@/components/PageLayout";
 import Card from "@/components/Card";
 import { monks as monkDefs } from "@/app/chat/monks";
 import CharacterFigure from "@/components/CharacterFigure";
+
+export const metadata: Metadata = {
+  title: "AI僧侶に相談 | Tera Talk",
+  description:
+    "釈迦・空海・道元を模したAIに悩みを相談。視点の異なる教えで心を整える対話を提供します。",
+  alternates: { canonical: "/chat" },
+  openGraph: {
+    title: "AI僧侶に相談 | Tera Talk",
+    description:
+      "釈迦・空海・道元を模したAIに悩みを相談。視点の異なる教えで心を整える対話を提供します。",
+    url: "/chat",
+  },
+};
 
 const monks = [
   {

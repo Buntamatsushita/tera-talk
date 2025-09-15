@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { monks, MonkKey } from "@/app/chat/monks";
@@ -156,4 +157,22 @@ export default async function SummaryPage({ params }: { params: Promise<{ monk: 
       </main>
     </div>
   );
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ monk: MonkKey }> }
+): Promise<Metadata> {
+  const { monk: monkKey } = await params;
+  const monk = monks[monkKey];
+  if (!monk) return {};
+  const title = `${monk.name}との対話サマリー | Tera Talk`;
+  const description = `${monk.title}（${monk.name}）との直近の気づきと次の一歩を振り返ります。`;
+  const path = `/chat/${monkKey}/summary`;
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: { title, description, url: path, images: [{ url: monk.image }] },
+    twitter: { title, description, images: [monk.image] },
+  };
 }
