@@ -5,7 +5,7 @@ import { Heart } from "lucide-react";
 
 interface FavoriteItem {
   id: string;
-  type: "concept" | "sect" | "monk";
+  type: "concept" | "sect" | "monk" | "story";
   title: string;
   description: string;
   url: string;
@@ -16,7 +16,7 @@ interface FavoriteItem {
 
 interface FavoriteButtonProps {
   id: string;
-  type: "concept" | "sect" | "monk";
+  type: "concept" | "sect" | "monk" | "story";
   title: string;
   description: string;
   url: string;
@@ -79,24 +79,35 @@ export default function FavoriteButton({
       aria-pressed={isFavorite}
       className="inline-flex items-center justify-center rounded-lg transition-colors"
       style={{
-        padding: '0.5rem',
+        padding: "0.5rem",
         border: isFavorite
-          ? '2px solid var(--color-accent)'
+          ? "2px solid var(--color-accent)"
           : isHovering
-          ? '2px solid var(--color-accent)'
-          : '2px solid var(--color-border)',
+          ? "2px solid var(--color-accent)"
+          : "2px solid var(--color-border)",
         backgroundColor: isFavorite
-          ? (isHovering ? 'var(--color-accent-hover)' : 'var(--color-accent)')
-          : (isHovering ? 'var(--color-sub-bg)' : 'transparent'),
+          ? isHovering
+            ? "var(--color-accent-hover)"
+            : "var(--color-accent)"
+          : isHovering
+          ? "var(--color-sub-bg)"
+          : "transparent",
         color: isFavorite
-          ? '#ffffff'
-          : (isHovering ? 'var(--color-accent)' : 'var(--color-text-primary)'),
-        boxShadow: isHovering ? '0 4px 12px var(--color-shadow)' : '0 2px 8px var(--color-shadow)'
+          ? "#ffffff"
+          : isHovering
+          ? "var(--color-accent)"
+          : "var(--color-text-primary)",
+        boxShadow: isHovering
+          ? "0 4px 12px var(--color-shadow)"
+          : "0 2px 8px var(--color-shadow)",
       }}
       title={isFavorite ? "お気に入りから削除" : "お気に入りに追加"}
       aria-label={isFavorite ? "お気に入りから削除" : "お気に入りに追加"}
     >
-      <Heart className="w-5 h-5" style={{ fill: isFavorite ? 'currentColor' : 'none' }} />
+      <Heart
+        className="w-5 h-5"
+        style={{ fill: isFavorite ? "currentColor" : "none" }}
+      />
     </button>
   );
 }

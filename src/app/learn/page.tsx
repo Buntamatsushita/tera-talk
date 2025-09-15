@@ -19,7 +19,8 @@ export const metadata: Metadata = {
   },
 };
 
-const buddhistConcepts = [
+// 概念（教義）
+const conceptCards = [
   {
     slug: "shiku-hakku",
     title: "四苦八苦",
@@ -93,9 +94,10 @@ export default function LearnPage() {
           </p>
         </div>
 
-        {/* Concept Grid */}
+        {/* Concepts */}
+        <h3 className="heading-secondary mb-4">基本の教え</h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {buddhistConcepts.map((concept) => (
+          {conceptCards.map((concept) => (
             <Card key={concept.slug} className="group-hover:scale-105 h-full">
               <div className="flex items-start justify-between mb-4">
                 <div
@@ -132,6 +134,8 @@ export default function LearnPage() {
             </Card>
           ))}
         </div>
+
+        {/* Stories セクションは story/ に分離 */}
 
         {/* Study Tips */}
         <Card className="mt-16">

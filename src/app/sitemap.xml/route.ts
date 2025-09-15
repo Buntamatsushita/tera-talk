@@ -35,5 +35,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "/" ? 1 : 0.6,
   }));
 }
-
-

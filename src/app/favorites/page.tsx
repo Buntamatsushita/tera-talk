@@ -15,7 +15,7 @@ import Card from "@/components/Card";
 
 interface FavoriteItem {
   id: string;
-  type: "concept" | "sect" | "monk";
+  type: "concept" | "sect" | "monk" | "story";
   title: string;
   description: string;
   url: string;
@@ -52,6 +52,8 @@ export default function FavoritesPage() {
     switch (type) {
       case "concept":
         return "仏教思想";
+      case "story":
+        return "物語";
       case "sect":
         return "宗派";
       case "monk":

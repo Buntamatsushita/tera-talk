@@ -250,8 +250,7 @@ export default async function ConceptDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const concept =
-    buddhistConcepts[slug as keyof typeof buddhistConcepts];
+  const concept = buddhistConcepts[slug as keyof typeof buddhistConcepts];
 
   if (!concept) {
     notFound();
@@ -268,147 +267,145 @@ export default async function ConceptDetailPage({
   return (
     <PageLayout currentPage="learn">
       <div className="max-w-4xl mx-auto">
-          {/* Breadcrumb */}
-          <nav className="mb-8">
-            <Link href="/learn" className="font-sans text-sm hover:opacity-70 transition-opacity" style={{ color: 'var(--color-accent)' }}>
-              ← 仏教思想一覧に戻る
-            </Link>
-          </nav>
+        {/* Breadcrumb */}
+        <nav className="mb-8">
+          <Link
+            href="/learn"
+            className="font-sans text-sm hover:opacity-70 transition-opacity"
+            style={{ color: "var(--color-accent)" }}
+          >
+            ← 仏教思想一覧に戻る
+          </Link>
+        </nav>
 
-          {/* Concept Header */}
-          <div className="text-center mb-16">
-            <div className="w-24 h-24 rounded-3xl flex items-center justify-center mb-6 mx-auto card" aria-hidden="true">
-              <span className="text-white font-bold text-4xl font-serif" style={{ color: 'white' }}>
-                {concept.icon}
-              </span>
-            </div>
-            <h2 className="heading-primary mb-4">
-              {concept.title}
-            </h2>
-            <p className="body-text-lg max-w-3xl mx-auto">
-              {concept.description}
-            </p>
+        {/* Concept Header */}
+        <div className="text-center mb-16">
+          <div
+            className="w-24 h-24 rounded-3xl flex items-center justify-center mb-6 mx-auto card"
+            aria-hidden="true"
+          >
+            <span
+              className="text-white font-bold text-4xl font-serif"
+              style={{ color: "white" }}
+            >
+              {concept.icon}
+            </span>
           </div>
-
-          {/* Content */}
-          <div className="space-y-12">
-            {/* Introduction */}
-            <section className="card fade-in">
-              <h3 className="heading-secondary mb-4">はじめに</h3>
-              <p className="body-text-lg">
-                {concept.content.introduction}
-              </p>
-            </section>
-
-            {/* Main Content Sections */}
-            {Object.entries(concept.content)
-              .filter(([key]) => key !== "introduction")
-              .map(([key, content]) => (
-                <section
-                  key={key}
-                  className="card fade-in"
-                >
-                  <h3 className="heading-secondary mb-4">
-                    {typeof content === "object" && "title" in content
-                      ? content.title
-                      : key}
-                  </h3>
-
-                  {typeof content === "object" && "explanation" in content && (
-                    <p className="body-text-lg mb-4">
-                      {content.explanation}
-                    </p>
-                  )}
-
-                  {typeof content === "object" && "items" in content && (
-                    <div className="space-y-4">
-                      {content.items.map(
-                        (
-                          item:
-                            | string
-                            | {
-                                name: string;
-                                meaning?: string;
-                                explanation?: string;
-                              },
-                          index: number
-                        ) => (
-                          <div
-                            key={index}
-                            className="pl-5 border-l-4"
-                            style={{ borderColor: 'var(--color-accent)' }}
-                          >
-                            <h4 className="heading-tertiary mb-2">
-                              {typeof item === "string" ? item : item.name}
-                            </h4>
-                            {typeof item === "object" && item.meaning && (
-                              <p className="body-text mb-2" style={{ color: 'var(--color-success)' }}>
-                                {item.meaning}
-                              </p>
-                            )}
-                            {typeof item === "object" && item.explanation && (
-                              <p className="body-text">
-                                {item.explanation}
-                              </p>
-                            )}
-                          </div>
-                        )
-                      )}
-                    </div>
-                  )}
-
-                  {typeof content === "object" && "content" in content && (
-                    <p className="body-text-lg">
-                      {content.content}
-                    </p>
-                  )}
-
-                  {typeof content === "object" && "meaning" in content && (
-                    <p className="body-text-lg">
-                      {content.meaning}
-                    </p>
-                  )}
-                </section>
-              ))}
-          </div>
-
-          {/* Navigation */}
-          <div className="flex justify-between mt-16">
-            {prevSlug ? (
-              <Link
-                href={`/learn/${prevSlug}`}
-                className="flex items-center space-x-2 font-sans hover:opacity-70 transition-opacity"
-                style={{ color: 'var(--color-accent)' }}
-              >
-                <ArrowLeft className="w-5 h-5" />
-                <span>
-                  {
-                    buddhistConcepts[prevSlug as keyof typeof buddhistConcepts]
-                      .title
-                  }
-                </span>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-
-            {nextSlug && (
-              <Link
-                href={`/learn/${nextSlug}`}
-                className="flex items-center space-x-2 font-sans hover:opacity-70 transition-opacity"
-                style={{ color: 'var(--color-accent)' }}
-              >
-                <span>
-                  {
-                    buddhistConcepts[nextSlug as keyof typeof buddhistConcepts]
-                      .title
-                  }
-                </span>
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            )}
-          </div>
+          <h2 className="heading-primary mb-4">{concept.title}</h2>
+          <p className="body-text-lg max-w-3xl mx-auto">
+            {concept.description}
+          </p>
         </div>
+
+        {/* Content */}
+        <div className="space-y-12">
+          {/* Introduction */}
+          <section className="card fade-in">
+            <h3 className="heading-secondary mb-4">はじめに</h3>
+            <p className="body-text-lg">{concept.content.introduction}</p>
+          </section>
+
+          {/* Main Content Sections */}
+          {Object.entries(concept.content)
+            .filter(([key]) => key !== "introduction")
+            .map(([key, content]) => (
+              <section key={key} className="card fade-in">
+                <h3 className="heading-secondary mb-4">
+                  {typeof content === "object" && "title" in content
+                    ? content.title
+                    : key}
+                </h3>
+
+                {typeof content === "object" && "explanation" in content && (
+                  <p className="body-text-lg mb-4">{content.explanation}</p>
+                )}
+
+                {typeof content === "object" && "items" in content && (
+                  <div className="space-y-4">
+                    {content.items.map(
+                      (
+                        item:
+                          | string
+                          | {
+                              name: string;
+                              meaning?: string;
+                              explanation?: string;
+                            },
+                        index: number
+                      ) => (
+                        <div
+                          key={index}
+                          className="pl-5 border-l-4"
+                          style={{ borderColor: "var(--color-accent)" }}
+                        >
+                          <h4 className="heading-tertiary mb-2">
+                            {typeof item === "string" ? item : item.name}
+                          </h4>
+                          {typeof item === "object" && item.meaning && (
+                            <p
+                              className="body-text mb-2"
+                              style={{ color: "var(--color-success)" }}
+                            >
+                              {item.meaning}
+                            </p>
+                          )}
+                          {typeof item === "object" && item.explanation && (
+                            <p className="body-text">{item.explanation}</p>
+                          )}
+                        </div>
+                      )
+                    )}
+                  </div>
+                )}
+
+                {typeof content === "object" && "content" in content && (
+                  <p className="body-text-lg">{content.content}</p>
+                )}
+
+                {typeof content === "object" && "meaning" in content && (
+                  <p className="body-text-lg">{content.meaning}</p>
+                )}
+              </section>
+            ))}
+        </div>
+
+        {/* Navigation */}
+        <div className="flex justify-between mt-16">
+          {prevSlug ? (
+            <Link
+              href={`/learn/${prevSlug}`}
+              className="flex items-center space-x-2 font-sans hover:opacity-70 transition-opacity"
+              style={{ color: "var(--color-accent)" }}
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span>
+                {
+                  buddhistConcepts[prevSlug as keyof typeof buddhistConcepts]
+                    .title
+                }
+              </span>
+            </Link>
+          ) : (
+            <div></div>
+          )}
+
+          {nextSlug && (
+            <Link
+              href={`/learn/${nextSlug}`}
+              className="flex items-center space-x-2 font-sans hover:opacity-70 transition-opacity"
+              style={{ color: "var(--color-accent)" }}
+            >
+              <span>
+                {
+                  buddhistConcepts[nextSlug as keyof typeof buddhistConcepts]
+                    .title
+                }
+              </span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          )}
+        </div>
+      </div>
     </PageLayout>
   );
 }
