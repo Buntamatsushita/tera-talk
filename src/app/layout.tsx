@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import Script from "next/script";
 
 const SITE_NAME = "Tera Talk";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || ""; // 可能なら環境変数で完全URLを設定
@@ -43,19 +44,9 @@ export const metadata: Metadata = {
     images: [`${BASE_PATH || ""}/icons/dogen.png`],
   },
   icons: {
-    icon: [
-      { url: `${BASE_PATH || ""}/favicon.ico` },
-    ],
+    icon: [{ url: `${BASE_PATH || ""}/favicon.ico` }],
   },
-  keywords: [
-    "仏教",
-    "AI僧侶",
-    "四苦八苦",
-    "諸行無常",
-    "縁起",
-    "宗派",
-    "禅",
-  ],
+  keywords: ["仏教", "AI僧侶", "四苦八苦", "諸行無常", "縁起", "宗派", "禅"],
   other: {
     "theme-color": "#0f172a",
   },
@@ -83,9 +74,25 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&display=swap"
           rel="stylesheet"
         />
-        <meta name="format-detection" content="telephone=no,address=no,email=no" />
+        <meta
+          name="format-detection"
+          content="telephone=no,address=no,email=no"
+        />
       </head>
       <body className="antialiased">
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-PC25ZYLEMF"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-PC25ZYLEMF');
+          `}
+        </Script>
         {children}
         <Footer />
       </body>
