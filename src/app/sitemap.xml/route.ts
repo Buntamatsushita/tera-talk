@@ -1,6 +1,7 @@
-import type { MetadataRoute } from "next";
+export const dynamic = "force-static";
+export const revalidate = 86400; // 24h
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export function GET() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "";
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   const prefix = `${base || ""}${basePath || ""}`;
@@ -21,17 +22,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sitemap",
   ];
 
-  // chat/[monk] 動的ルート
   const monkSlugs = ["shaka", "kukai", "dogen"];
   const monkPages = monkSlugs.flatMap((slug) => [
     `/chat/${slug}`,
     `/chat/${slug}/summary`,
   ]);
 
-  return [...staticPaths, ...monkPages].map((path): MetadataRoute.Sitemap[0] => ({
-    url: `${prefix}${path}`,
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: path === "/" ? 1 : 0.6,
-  }));
+  const urls = [...staticPaths, ...monkPages];
+
+  const xml =
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
+    urls
+      .map((path) => {
+        const loc = `${prefix}${path}`;
+        const priority = path === "/" ? "1.0" : "0.6";
+        return `\n  <url>\n    <loc>${loc}</loc>\n    <lastmod>${now}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+      })
+      .join("") +
+    `\n</urlset>`;
+
+  return new Response(xml, {
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, max-age=3600, s-maxage=3600",
+    },
+  });
 }
