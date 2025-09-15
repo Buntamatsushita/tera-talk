@@ -2,14 +2,15 @@ import Link from "next/link";
 import { MessageCircle, ArrowRight } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import Card from "@/components/Card";
+import { monks as monkDefs } from "@/app/chat/monks";
 
 const monks = [
   {
     slug: "shaka",
-    name: "釈迦",
-    title: "仏教の開祖",
+    name: monkDefs.shaka.name,
+    title: monkDefs.shaka.title,
     description: "普遍的かつ根本的な教えに基づいた回答をします。人生の根本的な悩みや、仏教の基本的な教えについて相談できます。",
-    icon: "釈",
+    image: monkDefs.shaka.image,
     characteristics: [
       "慈悲深く、すべての生き物を平等に愛する",
       "智慧に満ちた教えで根本的な解決を示す",
@@ -19,10 +20,10 @@ const monks = [
   },
   {
     slug: "kukai",
-    name: "空海",
-    title: "真言宗の開祖",
+    name: monkDefs.kukai.name,
+    title: monkDefs.kukai.title,
     description: "密教の視点から、現実世界での実践的な助言を与えます。修行や瞑想、現世での成功について相談できます。",
-    icon: "空",
+    image: monkDefs.kukai.image,
     characteristics: [
       "密教の深い智慧と実践的な教え",
       "現世での成功と精神的な成長の両立",
@@ -32,10 +33,10 @@ const monks = [
   },
   {
     slug: "dogen",
-    name: "道元",
-    title: "曹洞宗の開祖",
+    name: monkDefs.dogen.name,
+    title: monkDefs.dogen.title,
     description: "禅の思想に基づき、自己との向き合い方を諭します。瞑想、坐禅、自己探求について相談できます。",
-    icon: "道",
+    image: monkDefs.dogen.image,
     characteristics: [
       "只管打坐（ただひたすら坐る）の教え",
       "今この瞬間を大切にする生き方",
@@ -66,8 +67,9 @@ export default function ChatPage() {
             <Link key={monk.slug} href={`/chat/${monk.slug}`} className="group block">
               <Card className="group-hover:scale-105">
                 <div className="flex items-start space-x-6">
-                  <div className="w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-accent)' }}>
-                    <span className="text-white font-bold text-3xl">{monk.icon}</span>
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-accent)' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={monk.image} alt={`${monk.name}のアイコン`} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-4">
