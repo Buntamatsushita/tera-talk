@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
+import FavoriteButton from "@/components/FavoriteButton";
 import PageLayout from "@/components/PageLayout";
 import Card from "@/components/Card";
 
@@ -54,17 +55,31 @@ export default function LearnPage() {
             仏教の基本的な教えをテーマ別に分かりやすく学びましょう。
             <br />
             各テーマについて、図解や平易な文章で解説しています。
+            <br />
+            インド仏教の流れも合わせて学ぶと、思想の背景がよりクリアになります。
+            <Link href="/india" className="ml-2 font-sans" style={{ color: 'var(--color-accent)' }}>→ インド仏教の基礎</Link>
           </p>
         </div>
 
         {/* Concept Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {buddhistConcepts.map((concept) => (
-            <Link key={concept.slug} href={`/learn/${concept.slug}`} className="group">
-              <Card className="group-hover:scale-105 h-full">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: 'var(--color-accent)' }}>
+            <Card key={concept.slug} className="group-hover:scale-105 h-full">
+              <div className="flex items-start justify-between mb-4">
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'var(--color-accent)' }}>
                   <span className="text-white font-bold text-2xl">{concept.icon}</span>
                 </div>
+                <FavoriteButton
+                  id={`concept:/learn/${concept.slug}`}
+                  type="concept"
+                  title={concept.title}
+                  description={concept.description}
+                  url={`/learn/${concept.slug}`}
+                  icon={concept.icon}
+                  color={"from-blue-500 to-blue-600"}
+                />
+              </div>
+              <Link href={`/learn/${concept.slug}`} className="group">
                 <h3 className="heading-tertiary mb-4">
                   {concept.title}
                 </h3>
@@ -75,8 +90,8 @@ export default function LearnPage() {
                   詳しく学ぶ
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
-              </Card>
-            </Link>
+              </Link>
+            </Card>
           ))}
         </div>
 

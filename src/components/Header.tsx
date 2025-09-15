@@ -12,6 +12,7 @@ export default function Header({ currentPage }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigationItems = [
+    { href: "/india", label: "インド仏教", key: "india" },
     { href: "/learn", label: "仏教思想を学ぶ", key: "learn" },
     { href: "/chat", label: "AI僧侶に相談", key: "chat" },
     { href: "/sects", label: "日本仏教宗派", key: "sects" },

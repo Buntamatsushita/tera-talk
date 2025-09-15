@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, BookOpen, MapPin, Calendar } from "lucide-react";
 import { notFound } from "next/navigation";
+import PageLayout from "@/components/PageLayout";
+import Card from "@/components/Card";
 
 const sects = {
   tendai: {
@@ -355,6 +357,21 @@ const sects = {
   }
 };
 
+export function generateStaticParams() {
+  return Object.keys(sects).map((slug) => ({ slug }));
+}
+
+export function generateMetadata({ params }: { params: { slug: string } }) {
+  const sect = sects[params.slug as keyof typeof sects];
+  if (!sect) {
+    return { title: "宗派 | Tera Talk" };
+  }
+  return {
+    title: `${sect.name} | 日本仏教宗派 | Tera Talk`,
+    description: sect.description,
+  };
+}
+
 export default function SectDetailPage({ params }: { params: { slug: string } }) {
   const sect = sects[params.slug as keyof typeof sects];
   
@@ -368,167 +385,136 @@ export default function SectDetailPage({ params }: { params: { slug: string } })
   const nextSlug = currentIndex < sectKeys.length - 1 ? sectKeys[currentIndex + 1] : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800">
-      {/* Header */}
-      <header className="container mx-auto px-4 py-6">
-        <nav className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">仏</span>
-            </div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Tera Talk</h1>
+    <PageLayout currentPage="sects">
+      <div className="max-w-4xl mx-auto">
+        {/* Breadcrumb */}
+        <nav className="mb-8">
+          <Link href="/sects" className="font-sans" style={{ color: 'var(--color-accent)' }}>
+            ← 宗派一覧に戻る
           </Link>
-          <div className="hidden md:flex space-x-6">
-            <Link href="/learn" className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors">
-              仏教思想を学ぶ
-            </Link>
-            <Link href="/chat" className="text-gray-700 dark:text-gray-300 hover:text-amber-600 transition-colors">
-              AI僧侶に相談
-            </Link>
-            <Link href="/sects" className="text-amber-600 font-semibold">
-              日本仏教宗派
-            </Link>
-          </div>
         </nav>
-      </header>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
-          {/* Breadcrumb */}
-          <nav className="mb-8">
-            <Link href="/sects" className="text-purple-600 hover:text-purple-800 transition-colors">
-              ← 宗派一覧に戻る
-            </Link>
-          </nav>
+        {/* Sect Header */}
+        <div className="text-center mb-12">
+          <div className="w-24 h-24 rounded-3xl flex items-center justify-center mb-6 mx-auto" style={{ backgroundColor: 'var(--color-accent)' }}>
+            <span className="text-white font-bold text-4xl">{sect.icon}</span>
+          </div>
+          <h2 className="heading-primary mb-4">
+            {sect.name}
+          </h2>
+          <p className="body-text-lg mb-6">
+            {sect.description}
+          </p>
 
-          {/* Sect Header */}
-          <div className="text-center mb-16">
-            <div className={`w-24 h-24 bg-gradient-to-br ${sect.color} rounded-3xl flex items-center justify-center mb-6 mx-auto`}>
-              <span className="text-white font-bold text-4xl">{sect.icon}</span>
+          {/* Sect Info */}
+          <div className="grid md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+            <div className="flex items-center justify-center space-x-2">
+              <Calendar className="w-5 h-5" style={{ color: 'var(--color-accent)' }} />
+              <span className="body-text">{sect.period}</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              {sect.name}
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-              {sect.description}
+            <div className="flex items-center justify-center space-x-2">
+              <BookOpen className="w-5 h-5" style={{ color: 'var(--color-accent)' }} />
+              <span className="body-text">{sect.founder}</span>
+            </div>
+            <div className="flex items-center justify-center space-x-2">
+              <MapPin className="w-5 h-5" style={{ color: 'var(--color-accent)' }} />
+              <span className="body-text">{sect.headquarters}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="space-y-8">
+          {/* Introduction */}
+          <Card>
+            <h3 className="heading-secondary mb-4">はじめに</h3>
+            <p className="body-text">
+              {sect.content.introduction}
             </p>
-            
-            {/* Sect Info */}
-            <div className="grid md:grid-cols-3 gap-6 max-w-2xl mx-auto">
-              <div className="flex items-center justify-center space-x-2">
-                <Calendar className="w-5 h-5 text-purple-600" />
-                <span className="text-gray-600 dark:text-gray-300">{sect.period}</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2">
-                <BookOpen className="w-5 h-5 text-purple-600" />
-                <span className="text-gray-600 dark:text-gray-300">{sect.founder}</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2">
-                <MapPin className="w-5 h-5 text-purple-600" />
-                <span className="text-gray-600 dark:text-gray-300">{sect.headquarters}</span>
-              </div>
+          </Card>
+
+          {/* Founder */}
+          <Card>
+            <h3 className="heading-secondary mb-4">
+              {sect.content.founder.title}
+            </h3>
+            <p className="body-text">
+              {sect.content.founder.content}
+            </p>
+          </Card>
+
+          {/* Teachings */}
+          <Card>
+            <h3 className="heading-secondary mb-4">
+              {sect.content.teachings.title}
+            </h3>
+            <div className="space-y-4">
+              {sect.content.teachings.items.map((item, index) => (
+                <div key={index} className="pl-6" style={{ borderLeft: `4px solid var(--color-accent)` }}>
+                  <h4 className="heading-tertiary mb-1">
+                    {item.name}
+                  </h4>
+                  <p className="body-text">
+                    {item.explanation}
+                  </p>
+                </div>
+              ))}
             </div>
-          </div>
+          </Card>
 
-          {/* Content */}
-          <div className="space-y-12">
-            {/* Introduction */}
-            <section className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">はじめに</h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                {sect.content.introduction}
-              </p>
-            </section>
+          {/* Practices */}
+          <Card>
+            <h3 className="heading-secondary mb-4">
+              {sect.content.practices.title}
+            </h3>
+            <ul className="space-y-3">
+              {sect.content.practices.items.map((item, index) => (
+                <li key={index} className="flex items-start space-x-2">
+                  <span className="mt-1" style={{ color: 'var(--color-accent)' }}>•</span>
+                  <span className="body-text">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
 
-            {/* Founder */}
-            <section className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                {sect.content.founder.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                {sect.content.founder.content}
-              </p>
-            </section>
-
-            {/* Teachings */}
-            <section className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                {sect.content.teachings.title}
-              </h3>
-              <div className="space-y-4">
-                {sect.content.teachings.items.map((item, index) => (
-                  <div key={index} className="border-l-4 border-purple-500 pl-6">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                      {item.name}
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      {item.explanation}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Practices */}
-            <section className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                {sect.content.practices.title}
-              </h3>
-              <ul className="space-y-3">
-                {sect.content.practices.items.map((item, index) => (
-                  <li key={index} className="flex items-start space-x-2">
-                    <span className="text-purple-600 mt-1">•</span>
-                    <span className="text-gray-600 dark:text-gray-300">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Influence */}
-            <section className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                {sect.content.influence.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                {sect.content.influence.content}
-              </p>
-            </section>
-          </div>
-
-          {/* Navigation */}
-          <div className="flex justify-between mt-16">
-            {prevSlug ? (
-              <Link 
-                href={`/sects/${prevSlug}`}
-                className="flex items-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors"
-              >
-                <ArrowLeft className="w-5 h-5" />
-                <span>{sects[prevSlug as keyof typeof sects].name}</span>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-            
-            {nextSlug && (
-              <Link 
-                href={`/sects/${nextSlug}`}
-                className="flex items-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors"
-              >
-                <span>{sects[nextSlug as keyof typeof sects].name}</span>
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            )}
-          </div>
+          {/* Influence */}
+          <Card>
+            <h3 className="heading-secondary mb-4">
+              {sect.content.influence.title}
+            </h3>
+            <p className="body-text">
+              {sect.content.influence.content}
+            </p>
+          </Card>
         </div>
-      </main>
 
-      {/* Footer */}
-      <footer className="container mx-auto px-4 py-8 border-t border-gray-200 dark:border-gray-700">
-        <div className="text-center text-gray-600 dark:text-gray-400">
-          <p>&copy; 2024 Tera Talk. 仏教の教えを通じて、心の安らぎを。</p>
+        {/* Navigation */}
+        <div className="flex justify-between mt-12">
+          {prevSlug ? (
+            <Link 
+              href={`/sects/${prevSlug}`}
+              className="font-sans flex items-center space-x-2"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span>{sects[prevSlug as keyof typeof sects].name}</span>
+            </Link>
+          ) : (
+            <div></div>
+          )}
+          
+          {nextSlug && (
+            <Link 
+              href={`/sects/${nextSlug}`}
+              className="font-sans flex items-center space-x-2"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              <span>{sects[nextSlug as keyof typeof sects].name}</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          )}
         </div>
-      </footer>
-    </div>
+      </div>
+    </PageLayout>
   );
 }

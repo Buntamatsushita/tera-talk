@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Users, ArrowRight, BookOpen } from "lucide-react";
+import FavoriteButton from "@/components/FavoriteButton";
 import PageLayout from "@/components/PageLayout";
 import Card from "@/components/Card";
+import InteractiveLineage from "./components/InteractiveLineage";
 
 const sects = [
   {
@@ -116,17 +118,31 @@ export default function SectsPage() {
             日本の主要な仏教宗派の成り立ち、開祖、思想の特徴を学びましょう。
             <br />
             各宗派の歴史と教えを理解することで、日本仏教の全体像が見えてきます。
+            <br />
+            ルーツであるインド仏教の流れも併せて確認しましょう。
+            <Link href="/india" className="ml-2 font-sans" style={{ color: 'var(--color-accent)' }}>→ インド仏教の基礎</Link>
           </p>
         </div>
 
         {/* Sect Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {sects.map((sect) => (
-            <Link key={sect.slug} href={`/sects/${sect.slug}`} className="group">
-              <Card className="group-hover:scale-105 h-full">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: 'var(--color-accent)' }}>
+            <Card key={sect.slug} className="group-hover:scale-105 h-full">
+              <div className="flex items-start justify-between mb-4">
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'var(--color-accent)' }}>
                   <span className="text-white font-bold text-2xl">{sect.icon}</span>
                 </div>
+                <FavoriteButton
+                  id={`sect:/sects/${sect.slug}`}
+                  type="sect"
+                  title={sect.name}
+                  description={sect.description}
+                  url={`/sects/${sect.slug}`}
+                  icon={sect.icon}
+                  color={"from-purple-500 to-purple-600"}
+                />
+              </div>
+              <Link href={`/sects/${sect.slug}`} className="group">
                 <h3 className="heading-tertiary mb-2">
                   {sect.name}
                 </h3>
@@ -140,69 +156,22 @@ export default function SectsPage() {
                   詳しく学ぶ
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
-              </Card>
-            </Link>
+              </Link>
+            </Card>
           ))}
         </div>
 
-        {/* Sect Family Tree */}
-        <Card className="mb-16">
-          <div className="flex items-center mb-8">
+        {/* Sect Family Tree - Interactive */}
+        <Card className="mb-16" role="region" aria-labelledby="lineage-title">
+          <div className="flex items-center mb-6">
             <Users className="w-8 h-8 mr-3" style={{ color: 'var(--color-accent)' }} />
-            <h3 className="heading-secondary">宗派の系譜図</h3>
+            <h3 id="lineage-title" className="heading-secondary">宗派の系譜図（インタラクティブ）</h3>
           </div>
-          <div className="overflow-x-auto">
-            <div className="min-w-full">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div className="rounded-xl p-4 mb-3" style={{ backgroundColor: 'var(--color-accent)' }}>
-                    <span className="text-white font-bold text-lg">天台宗</span>
-                  </div>
-                  <p className="body-text text-sm">最澄</p>
-                </div>
-                <div className="text-center">
-                  <div className="rounded-xl p-4 mb-3" style={{ backgroundColor: 'var(--color-accent)' }}>
-                    <span className="text-white font-bold text-lg">真言宗</span>
-                  </div>
-                  <p className="body-text text-sm">空海</p>
-                </div>
-                <div className="text-center">
-                  <div className="rounded-xl p-4 mb-3" style={{ backgroundColor: 'var(--color-accent)' }}>
-                    <span className="text-white font-bold text-lg">浄土宗</span>
-                  </div>
-                  <p className="body-text text-sm">法然</p>
-                </div>
-                <div className="text-center">
-                  <div className="rounded-xl p-4 mb-3" style={{ backgroundColor: 'var(--color-accent)' }}>
-                    <span className="text-white font-bold text-lg">浄土真宗</span>
-                  </div>
-                  <p className="body-text text-sm">親鸞</p>
-                </div>
-                <div className="text-center">
-                  <div className="rounded-xl p-4 mb-3" style={{ backgroundColor: 'var(--color-accent)' }}>
-                    <span className="text-white font-bold text-lg">臨済宗</span>
-                  </div>
-                  <p className="body-text text-sm">栄西</p>
-                </div>
-                <div className="text-center">
-                  <div className="rounded-xl p-4 mb-3" style={{ backgroundColor: 'var(--color-accent)' }}>
-                    <span className="text-white font-bold text-lg">曹洞宗</span>
-                  </div>
-                  <p className="body-text text-sm">道元</p>
-                </div>
-                <div className="text-center">
-                  <div className="rounded-xl p-4 mb-3" style={{ backgroundColor: 'var(--color-accent)' }}>
-                    <span className="text-white font-bold text-lg">日蓮宗</span>
-                  </div>
-                  <p className="body-text text-sm">日蓮</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <InteractiveLineage />
         </Card>
 
         {/* Study Guide */}
-        <Card>
+        <Card id="study-guide">
           <div className="flex items-center mb-6">
             <BookOpen className="w-8 h-8 mr-3" style={{ color: 'var(--color-accent)' }} />
             <h3 className="heading-secondary">学習のガイド</h3>

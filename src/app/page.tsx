@@ -68,6 +68,22 @@ export default function Home() {
               </div>
             </Card>
           </Link>
+
+          <Link href="/india" className="group fade-in" style={{ animationDelay: '0.3s' }} aria-label="インド仏教ページへ移動">
+            <Card className="group-hover:transform group-hover:scale-105 h-full">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center mb-6 sm:mb-8 mx-auto" style={{ backgroundColor: 'var(--color-accent)' }} aria-hidden="true">
+                <span className="text-white font-bold">印</span>
+              </div>
+              <h3 className="heading-tertiary mb-4 sm:mb-6 text-center">インド仏教の基礎</h3>
+              <p className="body-text mb-6 sm:mb-8 text-center text-sm sm:text-base">
+                仏教発祥の地インドにおける初期仏教から大乗・密教、日本とのつながりを概観。
+              </p>
+              <div className="flex items-center justify-center font-sans font-medium group-hover:translate-x-2 transition-transform duration-300 text-sm sm:text-base" style={{ color: 'var(--color-accent)' }}>
+                概要を読む
+                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2" aria-hidden="true" />
+              </div>
+            </Card>
+          </Link>
         </div>
       </div>
     </PageLayout>

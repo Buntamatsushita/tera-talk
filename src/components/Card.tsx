@@ -6,16 +6,17 @@ interface CardProps {
   href?: string;
   onClick?: () => void;
   role?: string;
+  id?: string;
   "aria-label"?: string;
 }
 
-export default function Card({ children, className = "", href, onClick, role, "aria-label": ariaLabel }: CardProps) {
+export default function Card({ children, className = "", href, onClick, role, id, "aria-label": ariaLabel }: CardProps) {
   const baseClasses = "card";
   const combinedClasses = `${baseClasses} ${className}`.trim();
 
   if (href) {
     return (
-      <a href={href} className={combinedClasses} role={role} aria-label={ariaLabel}>
+      <a href={href} className={combinedClasses} role={role} id={id} aria-label={ariaLabel}>
         {children}
       </a>
     );
@@ -23,14 +24,14 @@ export default function Card({ children, className = "", href, onClick, role, "a
 
   if (onClick) {
     return (
-      <button onClick={onClick} className={combinedClasses} role={role} aria-label={ariaLabel}>
+      <button onClick={onClick} className={combinedClasses} role={role} id={id} aria-label={ariaLabel}>
         {children}
       </button>
     );
   }
 
   return (
-    <div className={combinedClasses} role={role} aria-label={ariaLabel}>
+    <div className={combinedClasses} role={role} id={id} aria-label={ariaLabel}>
       {children}
     </div>
   );

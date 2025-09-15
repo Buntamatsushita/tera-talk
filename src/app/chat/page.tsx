@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MessageCircle, ArrowRight } from "lucide-react";
+import FavoriteButton from "@/components/FavoriteButton";
 import PageLayout from "@/components/PageLayout";
 import Card from "@/components/Card";
 import { monks as monkDefs } from "@/app/chat/monks";
@@ -64,15 +65,15 @@ export default function ChatPage() {
         {/* Monk Selection */}
         <div className="space-y-8">
           {monks.map((monk) => (
-            <Link key={monk.slug} href={`/chat/${monk.slug}`} className="group block">
-              <Card className="group-hover:scale-105">
-                <div className="flex items-start space-x-6">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-accent)' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={monk.image} alt={`${monk.name}のアイコン`} className="w-full h-full object-cover" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-3 mb-4">
+            <Card key={monk.slug} className="group-hover:scale-105">
+              <div className="flex items-start space-x-6">
+                <div className="w-20 h-20 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-accent)' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={monk.image} alt={`${monk.name}のアイコン`} className="w-full h-full object-cover" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center space-x-3">
                       <h3 className="heading-secondary">
                         {monk.name}
                       </h3>
@@ -80,30 +81,28 @@ export default function ChatPage() {
                         {monk.title}
                       </span>
                     </div>
+                    <FavoriteButton
+                      id={`monk:/chat/${monk.slug}`}
+                      type="monk"
+                      title={monk.name}
+                      description={monk.description}
+                      url={`/chat/${monk.slug}`}
+                      icon={monk.name.substring(0,1)}
+                      color={"from-green-500 to-green-600"}
+                    />
+                  </div>
+                  <Link href={`/chat/${monk.slug}`} className="group block">
                     <p className="body-text mb-6 leading-relaxed">
                       {monk.description}
                     </p>
-                    <div className="mb-6">
-                      <h4 className="font-semibold mb-3" style={{ color: 'var(--color-text-primary)' }}>特徴</h4>
-                      <ul className="space-y-2">
-                        {monk.characteristics.map((characteristic, index) => (
-                          <li key={index} className="flex items-start space-x-2">
-                            <span className="mt-1" style={{ color: 'var(--color-success)' }}>•</span>
-                            <span className="body-text text-sm">
-                              {characteristic}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
                     <div className="flex items-center font-semibold group-hover:translate-x-2 transition-transform" style={{ color: 'var(--color-success)' }}>
                       相談を始める
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </div>
-                  </div>
+                  </Link>
                 </div>
-              </Card>
-            </Link>
+              </div>
+            </Card>
           ))}
         </div>
 
